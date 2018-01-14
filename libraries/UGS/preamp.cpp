@@ -769,12 +769,12 @@ bool Preamp::ProcessSerial(String &cmd, String &val)
 
 	if (data != "")
 	{
-		
+		/*
 		Serial.print("RX (");
 		Serial.print(d);
 		Serial.print("):");
 		Serial.println(data);
-		
+		*/
 
 		cmd = data.substring(0, data.indexOf('='));
 		val = data.substring(data.indexOf('=') + 1);
