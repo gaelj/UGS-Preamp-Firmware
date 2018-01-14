@@ -738,51 +738,43 @@ bool Preamp::ProcessSerial(String &cmd, String &val)
 		if (data.startsWith("\n")) data = data.substring(1);
 		if (data.endsWith("\n")) data = data.substring(0, data.length() - 2);
 		data.trim();
-
-		// Serial.print("REM:");
-		// Serial.println(data);
 	}
-	/*
-		while (c != '\n' && c != '\r' && cnt++ < MAX) {
-			// read the incoming bytes:
-			c = (char)Serial.read();
-			if ((int)c > -1) {
-				cnt = 0;
-				data += c;
-				// d = 1;
-				// dataFound = true;
-			}
-		}
-	*/
-	else if (Serial2.available() > 0) /*{
-		data = Serial.readStringUntil('\r');
+	if (Serial1.available() > 0) {
+
+		data = Serial1.readStringUntil('\r');
 		if (data.startsWith("\n")) data = data.substring(1);
 		if (data.endsWith("\n")) data = data.substring(0, data.length() - 2);
-	}*/
+		data.trim();
+	}
+	if (Serial2.available() > 0) {
+
+		data = Serial2.readStringUntil('\r');
+		if (data.startsWith("\n")) data = data.substring(1);
+		if (data.endsWith("\n")) data = data.substring(0, data.length() - 2);
+		data.trim();
+	}
+	/*
+	else if (Serial2.available() > 0)
 		while (c != '\n' && c != '\r'  && cnt++ < MAX) {
 			// read the incoming bytes:
 			c = (char)Serial2.read();
 			if ((int)c > -1) {
 				cnt = 0;
 				data += c;
-				// d = 2;
-				// dataFound = true;
 			}
 		}
-
+	*/
 
 	data.trim();
 
 	if (data != "")
 	{
-
-
-		/*
+		
 		Serial.print("RX (");
 		Serial.print(d);
 		Serial.print("):");
 		Serial.println(data);
-		*/
+		
 
 		cmd = data.substring(0, data.indexOf('='));
 		val = data.substring(data.indexOf('=') + 1);
